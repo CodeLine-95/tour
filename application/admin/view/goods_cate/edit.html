@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+{include file="public:title"/}
+<style media="screen">
+.layui-form-select{
+  width: 165px;
+}
+.layui-form-item .layui-input-inline{
+  width: auto;
+}
+</style>
+</head>
+<body>
+  <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-md12">
+        <div class="layui-card">
+          <div class="layui-card-header">编辑商品</div>
+          <div class="layui-form layui-card-body" pad15>
+            <input type="hidden" name="id" value="{$field.id}">
+            <div class="layui-form-item">
+              <label class="layui-form-label" for="cate_name">名称</label>
+              <div class="layui-input-block">
+                <input type="text" name="cate_name" value="{$field.cate_name}" id="cate_name" lay-verify="required" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">区别</label>
+              <div class="layui-input-block">
+                <input type="radio" value="1" class="layui-input" title="国内汽车" {if condition="$field.cate_type == 1"}checked{/if} name="cate_type">
+                <input type="radio" value="2" class="layui-input" title="国外汽车" {if condition="$field.cate_type == 2"}checked{/if} name="cate_type">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label" for="cate_sort">排序</label>
+              <div class="layui-input-block">
+                <input type="number" value="{$field.cate_sort}" class="layui-input" name="cate_sort" id="cate_sort">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                  <label class="layui-form-label"><button class="layui-btn" lay-submit lay-filter="edit">编辑</button></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    layui.use(['form'], function(){
+      var form = layui.form;
+      form.on('submit(edit)', function(data){
+        $.post('{:url("GoodsCate/edit")}',data.field,function (res) {
+          if (res.icon == 6){
+            layer.msg(res.msg,{icon: res.icon,time:1000},function(){
+              window.parent.location.reload();
+            });
+          } else {
+            layer.msg(res.msg,{icon: res.icon,time:1000},function(){
+              window.location.reload();
+            });
+          }
+        },'json');
+        return false;
+      });
+    });
+  </script>
+</body>
+</html>

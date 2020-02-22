@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+{include file="public:title"/}
+<style media="screen">
+.layui-form-select{
+  width: 165px;
+}
+.layui-form-item .layui-input-inline{
+  width: auto;
+}
+</style>
+</head>
+<body>
+  <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-md12">
+        <div class="layui-card">
+          <div class="layui-card-header">添加导游</div>
+          <div class="layui-form layui-card-body" pad15>
+            <div class="layui-form-item">
+              <label class="layui-form-label" for="name">名称</label>
+              <div class="layui-input-block">
+                <input type="text" name="name" id="name" lay-verify="required" class="layui-input">
+              </div>
+  			</div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">景点</label>
+              <div class="layui-input-inline">
+                {foreach $cate as $c}
+                <input type="radio" name="cate_id" title="{$c.name}" value="{$c.id}" checked class="layui-input">
+                {/foreach}
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label" for="price">价格</label>
+              <div class="layui-input-block">
+                <input type="text" step="0.00" value="0.00" name="price" class="layui-input" id="price">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label" for="face">封面</label>
+              <div class="layui-input-block">
+                <button type="button" style="float:left;margin-right:1%;" id="face" class="layui-btn"><i class="layui-icon">&#xe67c;</i>上传</button>
+                <input type="text" style="width:53%;float:left;display:none;background-color:#dcdcdc;" readonly name="face" class="layui-input">
+                <div id="pic_img" style="margin-top: 10px;">
+
+                </div>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">性别</label>
+              <div class="layui-input-inline">
+                <input type="radio" name="sex" title="男" value="1" checked class="layui-input">
+                <input type="radio" name="sex" title="女" value="2" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label" for="age">年龄</label>
+              <div class="layui-input-block">
+                <input type="number" value="1" class="layui-input" name="age" id="age">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label" for="desc">介绍</label>
+              <div class="layui-input-block">
+                <textarea name="desc" id="desc" class="layui-textarea"></textarea>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label" for="start_t">开始时间</label>
+              <div class="layui-input-block">
+                <input type="text" class="layui-input" name="start_t" id="start_t">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label" for="end_t">结束时间</label>
+              <div class="layui-input-block">
+                <input type="text" class="layui-input" name="end_t" id="end_t">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                  <label class="layui-form-label"><button class="layui-btn" lay-submit lay-filter="add">添加</button></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    layui.use(['form','upload','laydate'], function(){
+      var form = layui.form,upload = layui.upload,laydate = layui.laydate;
+      //时间
+      laydate.render({
+        elem: '#start_t' //指定元素
+      });
+      laydate.render({
+        elem: '#end_t' //指定元素
+      });
+      //多图上传实例
+      upload.render({
+        elem: '#face',
+        url: '{:url("AjaxAction/upload")}',
+        accept:"images",
+        acceptMime: 'image/*',
+        exts:"jpg|png|gif|bmp|jpeg",
+        auto:true,
+        size:{$conf['maxfile']},
+        drag:false,
+        before: function(obj) {
+          layer.msg('上传中...', {icon: 16,shade: 0.01,time: 0})
+        },
+        done: function(res) {
+            layer.close(layer.msg('上传成功！'));
+            $('input[name=face]').val(res.data);
+            $('#pic_img').html('<img src="'+res.data+'" />');
+        }
+        ,error: function(){
+            layer.msg('上传错误！');
+        }
+      });
+      form.on('submit(add)', function(data){
+        $.post('{:url("guide/add")}',data.field,function (res) {
+          if (res.icon == 6){
+            layer.msg(res.msg,{icon: res.icon,time:1000},function(){
+              window.parent.location.reload();
+            });
+          } else {
+            layer.msg(res.msg,{icon: res.icon,time:1000},function(){
+              window.location.reload();
+            });
+          }
+        },'json');
+        return false;
+      });
+    });
+  </script>
+</body>
+</html>

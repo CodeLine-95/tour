@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+ {include file="public:title"/}
+ <style media="screen">
+   .layui-table tbody tr:hover{
+     background-color: #fff;
+   }
+   .layui-form-select{
+    width: 100px;
+   }
+   .layui-form-select dl dd.layui-this {
+     background-color: #1E9FFF;
+     color: #fff;
+   }
+ </style>
+</head>
+<body>
+<div class="layui-fluid" class="layui-form">
+    <div class="layui-card">
+    <div class="layui-tab layui-tab-brief">
+      <table class="layui-table">
+          <tr>
+            <td>订单号</td>
+            <td>{$field.orderID}</td>
+            <td>创建时间</td>
+            <td>{:date('Y-m-d H:i:s',$field.create_t)}</td>
+            <td>订单状态</td>
+            <td>
+              {switch name="$field.status"}
+              {case value="1"}<span class="layui-btn layui-btn-normal layui-btn-xs">已付款</span>{/case}
+              {case value="2"}<span class="layui-btn layui-btn-normal layui-btn-xs">已发货</span>{/case}
+              {/switch}
+            </td>
+          </tr>
+      </table>
+    </div>
+  </div>
+    <div class="layui-card">
+        <div class="layui-tab layui-tab-brief">
+            <table class="layui-table">
+                <tr>
+                    <td>商品编号</td>
+                    <td>{$goods.id}</td>
+                    <td>商品名称</td>
+                    <td>{$goods.name}</td>
+                    <td>商品图片</td>
+                    <td><img src="{$goods.pic}" alt=""></td>
+                    <td>商品分类</td>
+                    <td>{$goods.cate_name}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="layui-card">
+        <div class="layui-tab layui-tab-brief">
+            <table class="layui-table">
+                <tr>
+                    <td>用户名</td>
+                    <td>{$users.user_name}</td>
+                    <td>用户头像</td>
+                    <td><img src="{$users.user_face}" alt=""></td>
+                    <td>用户昵称</td>
+                    <td>{$users.user_nick}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

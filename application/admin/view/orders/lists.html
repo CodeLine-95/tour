@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+ {include file="public:title"/}
+ <style media="screen">
+   .layui-table tbody tr:hover{
+     background-color: #fff;
+   }
+   .layui-form-select{
+    width: 100px;
+   }
+   .layui-form-select dl dd.layui-this {
+     background-color: #1E9FFF;
+     color: #fff;
+   }
+ </style>
+</head>
+<body>
+<div class="layui-fluid" class="layui-form">
+  <div class="layui-card">
+    <div class="layui-tab layui-tab-brief">
+      <crmblok>
+          <div style="position: relative;height: 38px;">
+<!--            <button class="layui-btn layui-btn-danger" onclick="delAll()"></button>-->
+<!--            <button class="layui-btn layui-btn-normal" onclick="crm_admin_show('添加','{:url('/add')}')"><i class="layui-icon">&#xe608;</i>添加</button>-->
+            <form class="layui-form" method="get" style="display:inline-block;position: absolute;right: 0;">
+              <div class="layui-input-inline">
+                <select name="type">
+                  <option value="1" {if condition="$get['type'] == 1"}select{/if}>订单号</option>
+<!--                  <option value="2">昵称</option>-->
+                </select>
+              </div>
+              <div class="layui-input-inline">
+                <input type="text" name="name" value="{$get['name']}" class="layui-input" style="background-color:#eee;border:none;">
+              </div>
+              <button class="layui-btn layui-btn-normal" type="submit"><i class="layui-icon layui-icon-search"></i>搜索</button>
+            </form>
+          </div>
+      </crmblok>
+      <table class="layui-table">
+          <thead>
+            <tr>
+<!--              <th width="25" align="center">-->
+<!--                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>-->
+<!--              </th>-->
+              <th align="center" style="width:80px;">序号</th>
+              <th align="center">订单号</th>
+              <th align="center">商品编号</th>
+              <th align="center">商品名称</th>
+              <th align="center">商品数量</th>
+              <th align="center">购买用户</th>
+              <th align="center">购买时间</th>
+              <th align="center">订单状态</th>
+              <th align="center">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          {empty name="list"}
+            <tr align="center" style="height:500px;"><td colspan="10">暂无导游</td></tr>
+          {else}
+            {foreach $list as $l}
+              <tr>
+                <td>{$l['id']}</td>
+                <td>{$l['orderID']}</td>
+                <td>{$l['goodsID']}</td>
+                <td>{$l['goodsName']}</td>
+                <td>{$l['goodsCount']}</td>
+                <td>{$l['userName']}</td>
+                <td>{:date('Y-m-d H:i:s')}</td>
+                <td>
+                  {switch name="$l['status']"}
+                  {case value="1"}<span class="layui-btn layui-btn-normal layui-btn-xs">已付款</span>{/case}
+                  {case value="2"}<span class="layui-btn layui-btn-normal layui-btn-xs">已发货</span>{/case}
+                  {/switch}
+                </td>
+                <td>
+                  {if condition="$l['status'] eq 1"}
+                  <button class="layui-btn layui-btn-normal layui-btn-sm" onclick="send('{$l['id']}')">发货</button>
+                  {/if}
+                	 <button class="layui-btn layui-btn-normal layui-btn-sm" onclick="crm_admin_show('查看','{:url('orders/show',['id'=>$l['id']])}')">查看</button>
+                   <button class="layui-btn layui-btn-normal layui-btn-sm layui-btn-danger" onclick="del('{$l['id']}')">删除</button>
+                </td>
+              </tr>
+            {/foreach}
+          {/empty}
+          </tbody>
+        </table>
+      <div style="text-align: center">
+        <div class="laypage-main">
+          {$list->render()}
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <script>
+    function send(id){
+      layer.confirm("您确定要发货该订单吗？",function(){
+  		  $.post("{:url('orders/send')}",{id:id},function (res) {
+            layer.msg(res.msg,{icon:res.icon,time:1000},function(){
+              window.location.reload();
+            });
+          },'json');
+  		});
+    }
+  	function del(id){
+  		layer.confirm("您确定删除该订单吗？",function(){
+  		  $.post("{:url('orders/del')}",{id:id},function (res) {
+            layer.msg(res.msg,{icon:res.icon,time:1000},function(){
+              window.location.reload();
+            });
+          },'json');
+  		});
+  	}
+  </script>
+</body>
+</html>
