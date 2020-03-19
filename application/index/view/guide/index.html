@@ -10,16 +10,28 @@
         <div class="wrap1200">
             <div class="products-list-title relative">
                 <div class="title fl">导游信息</div>
-<!--                <div class="sub-list-title">-->
-<!--                    <div class="sub-item fl "><a href="faguo/index.html">推荐</a></div>-->
-
-<!--                    <div class="sub-item fl "><a href="xinjiapo/index.html">热门</a></div>-->
-<!--                </div>-->
             </div>
             <div class="blank25"></div>
             <div class="fz0">
+                <style>
+                    .hover:hover{
+                        border: 1px solid #009FE3;
+                        box-shadow: 2px 2px 3px #009FE3;
+                        overflow: hidden;
+                    }
+                    .hover:hover img{
+                        /*cursor:pointer;*/
+                        width: 100%;
+                        transition: all 0.6s;
+                        transform: scale(1.1);
+                        z-index: -1;
+                    }
+                    .hover:hover .list-item-name a{
+                        border-bottom: 2px solid #009FE3;
+                    }
+                </style>
                 {foreach $list as $l}
-                <div class='list-item inline-block '>
+                <div class='list-item inline-block hover'>
                     <a href="{:url('guide/detail',array('id'=>$l['id']))}"><img src="{$l['face']}" width="100%" alt="{$l['name']}" /></a>
                     <div class="list-item-wrap">
                         <div class="list-item-name over"><a href="{:url('guide/detail',array('id'=>$l['id']))}" title="{$l['name']}">{$l['name']}</a></div>

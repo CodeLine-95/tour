@@ -71,8 +71,25 @@
             </div>
             <div class="blank25"></div>
             <div class="fz0">
+                <style>
+                    .hover:hover{
+                        border: 1px solid #009FE3;
+                        box-shadow: 2px 2px 3px #009FE3;
+                        overflow: hidden;
+                    }
+                    .hover:hover img{
+                        /*cursor:pointer;*/
+                        width: 100%;
+                        transition: all 0.6s;
+                        transform: scale(1.1);
+                        z-index: -1;
+                    }
+                    .hover:hover .list-item-name a{
+                        border-bottom: 2px solid #009FE3;
+                    }
+                </style>
                 {foreach $list as $l}
-                <div class='list-item inline-block '>
+                <div class='list-item inline-block hover'>
                     <a href="{:url('product/detail',array('id'=>$l['id']))}"><img src="{$l['pic']}" width="100%" alt="{$l['name']}" /></a>
                     <div class="list-item-wrap" style="min-height: auto">
                         <div class="list-item-name over"><a href="{:url('scenic/detail',array('id'=>$l['id']))}" title="{$l['name']}">{$l['name']}</a></div>

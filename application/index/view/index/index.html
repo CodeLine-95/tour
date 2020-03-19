@@ -11,54 +11,49 @@
     </div>
     <div class="blank15"></div>
     <div class="blank15"></div>
+    <style>
+        .categorys img:hover{
+            transition: all 0.6s;
+            transform: scale(1.1);
+        }
+        .categorys a:hover{
+            border-bottom: 2px solid #009FE3;
+        }
+        .title-2 a:hover{
+            transition: all 300ms;
+            transform: scale(1.1);
+            border-bottom: 2px solid #0000FF;
+        }
+    </style>
     <div id="products" class="index over">
+        <div style="width: 100px;height: 4px;background-color: #009FE3;margin: 20px auto;"></div>
         <div class="web-title text-center">
-            <div class="title-0">经典线路</div>
-            <div class="title-1 ">Class Route</div>
-        </div>
-        <div class="categorys text-center hide-992">
-            <a href="{:url('product/index')}" class="trans-internal inline-block" rel="nofollow">租车服务</a>
-            <a href="{:url('scenic/index')}" class="trans-internal inline-block" rel="nofollow">景点分类</a>
-            <a href="{:url('guide/index')}" class="trans-internal inline-block" rel="nofollow">导游信息</a>
-        </div>
-        <div class="categorys text-center wow fadeInUp block-992 relative">
-            <div class="dropdown inline-block">
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> 所有 <span class="caret"></span> </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-
-                    <li><a href="{:url('product/index')}" rel="nofollow" cid="1">租车服务</a></li>
-
-                    <li><a href="{:url('scenic/index')}" rel="nofollow" cid="1">景点分类</a></li>
-
-                    <li><a href="{:url('guide/index')}" rel="nofollow" cid="1">导游信息</a></li>
-
-                </ul>
+            <div class="title-0" style="font-size: 20px;font-weight: bold;margin-bottom: 10px;">自然的遗产 &nbsp;&nbsp; 世界的武隆</div>
+            <div class="title-1">武隆喀斯特地区山貌</div>
+            <div class="title-2" style="margin-top: 40px;">
+                <a href="#" style="display:block;margin:0 auto;width: 70px;height: 40px;border: 1px solid #009FE3;line-height: 40px;color: #009FE3;">探索</a>
             </div>
         </div>
-<!--        <div class="products-list clean max-limit swiper-container">-->
-<!--            <div class="swiper-wrapper"> <a class="item fl relative scale swiper-slide" fid="1" href="a/chujingyou/faguo/18.html" uid="0,1,">-->
-<!--                <div class="over"><img src="uploads/allimg/190419/1-1Z4191616060-L.jpg" alt="" class="max-w100 block scale-img trans"></div>-->
-<!--                <div class="name absolute">迪拜经典线路</div>-->
-<!--            </a>-->
-<!--                <a class="item fl relative scale swiper-slide" fid="1" href="a/chujingyou/24.html" uid="0,1,">-->
-<!--                    <div class="over"><img src="uploads/allimg/190419/1-1Z4191641430-L.jpg" alt="" class="max-w100 block scale-img trans"></div>-->
-<!--                    <div class="name absolute">泰国1</div>-->
-<!--                </a>-->
-<!--                <a class="item fl relative scale swiper-slide" fid="1" href="a/chujingyou/23.html" uid="0,1,">-->
-<!--                    <div class="over"><img src="uploads/allimg/190419/1-1Z4191639500-L.jpg" alt="" class="max-w100 block scale-img trans"></div>-->
-<!--                    <div class="name absolute">法国一</div>-->
-<!--                </a>-->
-<!--                <a class="item fl relative scale swiper-slide" fid="1" href="a/chujingyou/22.html" uid="0,1,">-->
-<!--                    <div class="over"><img src="uploads/allimg/190419/1-1Z419163U70-L.jpg" alt="" class="max-w100 block scale-img trans"></div>-->
-<!--                    <div class="name absolute">新加坡1</div>-->
-<!--                </a>-->
-<!--                <a class="item fl relative scale swiper-slide" fid="1" href="a/chujingyou/21.html" uid="0,1,">-->
-<!--                    <div class="over"><img src="uploads/allimg/190419/1-1Z419162Q80-L.jpg" alt="" class="max-w100 block scale-img trans"></div>-->
-<!--                    <div class="name absolute">泰国</div>-->
-<!--                </a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="opt text-center fz0 nowrap"> <a href="javascript:;" class="prev inline-block middle arrow arrow-left relative trans trans-internal" rel="nofollow"></a> <a href="a/chujingyou/index.html" class="inline-block middle more glyphicon glyphicon-th-large trans" title="查看更多列表"></a> <a href="javascript:;" class="next inline-block middle arrow arrow-right relative trans trans-internal" rel="nofollow"></a> </div>-->
+
+        <div class="categorys text-center" style="margin-top: 50px;">
+            <div style="height: 80px;width: 33%;margin: 0 auto;display: inline-block;">
+                <a href="{:url('product/index')}" style="font-size: 14px;color: #333;width: 60px;" class="trans-internal inline-block" rel="nofollow">
+                    <img src="/static/index/img/cart.png" style="width: 60px;height: 60px;margin: 5px 0;" alt="租车服务">租车服务
+                </a>
+            </div>
+            <div style="height: 80px;width: 33%;margin: 0 auto;display: inline-block;">
+                <a href="{:url('scenic/index')}" style="font-size: 14px;color: #333;width: 60px;" class="trans-internal inline-block" rel="nofollow">
+                    <img src="/static/index/img/scenic.png" style="width: 60px;height: 60px;margin: 5px 0;" alt="景点分类">景点分类
+                </a>
+            </div>
+            <div style="height: 80px;width: 33%;margin: 0 auto;display: inline-block;">
+                <a href="{:url('guide/index')}" style="font-size: 14px;color: #333;width: 60px;" class="trans-internal inline-block" rel="nofollow">
+                    <img src="/static/index/img/guide.png" style="width: 60px;height: 60px;margin: 5px 0;" alt="导游信息">导游信息
+                </a>
+            </div>
+<!--            <a href="{:url('scenic/index')}" class="trans-internal inline-block" rel="nofollow">景点分类</a>-->
+<!--            <a href="{:url('guide/index')}" class="trans-internal inline-block" rel="nofollow">导游信息</a>-->
+        </div>
     </div>
     <div class="blank20"></div>
     <div class="blank25"></div>
